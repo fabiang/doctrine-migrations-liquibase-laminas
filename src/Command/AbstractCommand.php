@@ -18,7 +18,7 @@ abstract class AbstractCommand extends Command
     /**
      * @param ClassMetadata[] $metadatas
      *
-     * @return int|null Null or 0 if everything went fine, or an error code.
+     * @return int 0 if everything went fine, or an error code.
      */
     abstract protected function executeSchemaCommand(InputInterface $input, OutputInterface $output, LiquibaseSchemaTool $schemaTool, array $metadatas, SymfonyStyle $ui): int;
 
@@ -38,6 +38,6 @@ abstract class AbstractCommand extends Command
             return 0;
         }
 
-        return $this->executeSchemaCommand($input, $output, LiquibaseSchemaTool($em), $metadatas, $ui);
+        return $this->executeSchemaCommand($input, $output, new LiquibaseSchemaTool($em), $metadatas, $ui);
     }
 }
