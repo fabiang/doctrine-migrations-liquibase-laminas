@@ -7,7 +7,7 @@ Zend Framework module for creating changesets for Liquibase with Doctrine.
 New to Composer? Read the [introduction](https://getcomposer.org/doc/00-intro.md#introduction). Run the following Composer command:
 
 ```console
-$ composer require fabiang/doctrine-migrations-liquibase-zf
+$ composer require --dev fabiang/doctrine-migrations-liquibase-zf=@dev
 ```
 
 ## Configuration
