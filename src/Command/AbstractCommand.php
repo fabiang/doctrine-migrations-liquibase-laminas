@@ -6,7 +6,6 @@ namespace Fabiang\DoctrineMigrationsLiquibase\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +20,7 @@ abstract class AbstractCommand extends Command
      *
      * @return int|null Null or 0 if everything went fine, or an error code.
      */
-    abstract protected function executeSchemaCommand(InputInterface $input, OutputInterface $output, SchemaTool $schemaTool, array $metadatas, SymfonyStyle $ui): int;
+    abstract protected function executeSchemaCommand(InputInterface $input, OutputInterface $output, LiquibaseSchemaTool $schemaTool, array $metadatas, SymfonyStyle $ui): int;
 
     /**
      * {@inheritdoc}
