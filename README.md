@@ -24,7 +24,7 @@ return [
 ```
 
 If you don't have a recommended `development.config.php` you can also add it to `application.config.php`.
-But you should not activate the module on production systems, as you simply to need it there.
+But you should not activate the module on production systems, as you don't need it there.
 
 ## Licence
 
