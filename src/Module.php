@@ -8,9 +8,10 @@ use Zend\ModuleManager\Feature\InitProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\ModuleManagerInterface;
 use Fabiang\DoctrineMigrationsLiquibase\CliConfigurator;
+use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
 use Zend\EventManager\EventInterface;
 
-final class Module implements InitProviderInterface, ServiceProviderInterface
+final class Module implements InitProviderInterface, ServiceProviderInterface, DependencyIndicatorInterface
 {
     /**
      * @var ConfigProvider
@@ -45,5 +46,10 @@ final class Module implements InitProviderInterface, ServiceProviderInterface
     public function getServiceConfig(): array
     {
         return $this->configProvider->getDependencies();
+    }
+
+    public function getModuleDependencies(): array
+    {
+        return ['DoctrineModule'];
     }
 }
