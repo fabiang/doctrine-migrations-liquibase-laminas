@@ -7,7 +7,7 @@ namespace Fabiang\DoctrineMigrationsLiquibase\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Toilal\Doctrine\Migrations\Liquibase\LiquibaseSchemaTool;
+use Fabiang\Doctrine\Migrations\Liquibase\LiquibaseSchemaTool;
 
 class CreateChangelogCommand extends AbstractCommand
 {
@@ -29,4 +29,5 @@ class CreateChangelogCommand extends AbstractCommand
 
         return 0;
     }
+
 }

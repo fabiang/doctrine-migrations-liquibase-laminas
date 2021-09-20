@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Fabiang\DoctrineMigrationsLiquibase;
 
-use Zend\ModuleManager\Feature\InitProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
-use Zend\ModuleManager\ModuleManagerInterface;
+use Laminas\ModuleManager\Feature\InitProviderInterface;
+use Laminas\ModuleManager\Feature\ServiceProviderInterface;
+use Laminas\ModuleManager\ModuleManagerInterface;
 use Fabiang\DoctrineMigrationsLiquibase\CliConfigurator;
-use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
-use Zend\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\DependencyIndicatorInterface;
+use Laminas\EventManager\EventInterface;
 
 final class Module implements InitProviderInterface, ServiceProviderInterface, DependencyIndicatorInterface
 {
-    /**
-     * @var ConfigProvider
-     */
-    private $configProvider;
+
+    private ConfigProvider $configProvider;
 
     public function __construct()
     {
@@ -26,21 +24,18 @@ final class Module implements InitProviderInterface, ServiceProviderInterface, D
     public function init(ModuleManagerInterface $manager): void
     {
         // Initialize the console
-        $manager
-            ->getEventManager()
+        $manager->getEventManager()
             ->getSharedManager()
             ->attach(
                 'doctrine',
                 'loadCli.post',
                 function (EventInterface $event) {
-                    $event
-                    ->getParam('ServiceManager')
+                    $event->getParam('ServiceManager')
                     ->get(CliConfigurator::class)
-                    ->configure($event->getTarget())
-                    ;
+                    ->configure($event->getTarget());
                 },
                 1
-            );
+        );
     }
 
     public function getServiceConfig(): array
@@ -52,4 +47,5 @@ final class Module implements InitProviderInterface, ServiceProviderInterface, D
     {
         return ['DoctrineModule'];
     }
+
 }

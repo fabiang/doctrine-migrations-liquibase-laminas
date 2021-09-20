@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Fabiang\DoctrineMigrationsLiquibase;
 
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Laminas\ServiceManager\Factory\InvokableFactory;
 
-class ConfigProvider
+final class ConfigProvider
 {
 
     public function __invoke(): array
@@ -30,4 +30,5 @@ class ConfigProvider
             ],
         ];
     }
+
 }

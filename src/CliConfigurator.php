@@ -6,21 +6,17 @@ namespace Fabiang\DoctrineMigrationsLiquibase;
 
 use Interop\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\InputOption;
 
 class CliConfigurator
 {
-    private $defaultObjectManagerName = 'doctrine.entitymanager.orm_default';
-    private $commands                 = [
+
+    private string $defaultObjectManagerName = 'doctrine.entitymanager.orm_default';
+    private array $commands                 = [
         'doctrine.liquibase.createchangelog',
         'doctrine.liquibase.creatediff',
     ];
-
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    private ContainerInterface $container;
 
     public function __construct(ContainerInterface $container)
     {
@@ -29,8 +25,7 @@ class CliConfigurator
 
     public function configure(Application $cli): void
     {
-        $commands = $this->getAvailableCommands();
-        foreach ($commands as $commandName) {
+        foreach ($this->commands as $commandName) {
             /* @var $command \Symfony\Component\Console\Command\Command */
             $command = $this->container->get($commandName);
             $command->getDefinition()->addOption($this->createObjectManagerInputOption());
@@ -49,17 +44,4 @@ class CliConfigurator
         );
     }
 
-    private function getObjectManagerName(): string
-    {
-        $arguments = new ArgvInput();
-        if (!$arguments->hasParameterOption('--object-manager')) {
-            return $this->defaultObjectManagerName;
-        }
-        return $arguments->getParameterOption('--object-manager');
-    }
-
-    private function getAvailableCommands(): array
-    {
-        return $this->commands;
-    }
 }
