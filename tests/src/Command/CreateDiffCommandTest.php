@@ -92,6 +92,9 @@ final class CreateDiffCommandTest extends TestCase
 
         $emConfig = $this->prophesize(EMConfig::class);
         $emConfig->getQuoteStrategy()->willReturn($quoteStrategy->reveal());
+        if (method_exists(EMConfig::class, 'getSchemaIgnoreClasses')) {
+            $emConfig->getSchemaIgnoreClasses()->willReturn([]);
+        }
 
         $table1 = new Table('tablename1');
         $table2 = new Table('tablename2');
@@ -124,6 +127,10 @@ final class CreateDiffCommandTest extends TestCase
             ->willReturn($platform->reveal());
         $connection->getSchemaManager()
             ->willReturn($schemaManager->reveal());
+        if (method_exists(Connection::class, 'createSchemaManager')) {
+            $connection->createSchemaManager()
+                ->willReturn($schemaManager->reveal());
+        }
 
         $this->em->getConnection()->willReturn($connection->reveal());
         $this->em->getConfiguration()->willReturn($emConfig->reveal());
@@ -138,5 +145,4 @@ final class CreateDiffCommandTest extends TestCase
 
         $this->assertStringContainsString('', $this->commandTester->getDisplay());
     }
-
 }
