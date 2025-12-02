@@ -2,8 +2,11 @@
 
 Laminas module for creating changesets for Liquibase with Doctrine.
 
-[![Unit Tests](https://github.com/fabiang/doctrine-migrations-liquibase-laminas/actions/workflows/unit.yml/badge.svg)](https://github.com/fabiang/doctrine-migrations-liquibase-laminas/actions/workflows/unit.yml)
-[![Latest Stable Version](http://poser.pugx.org/fabiang/doctrine-migrations-liquibase-laminas/v)](https://packagist.org/packages/fabiang/doctrine-migrations-liquibase-laminas) [![Total Downloads](http://poser.pugx.org/fabiang/doctrine-migrations-liquibase-laminas/downloads)](https://packagist.org/packages/fabiang/doctrine-migrations-liquibase-laminas) [![Latest Unstable Version](http://poser.pugx.org/fabiang/doctrine-migrations-liquibase-laminas/v/unstable)](https://packagist.org/packages/fabiang/doctrine-migrations-liquibase-laminas) [![License](http://poser.pugx.org/fabiang/doctrine-migrations-liquibase-laminas/license)](https://packagist.org/packages/fabiang/doctrine-migrations-liquibase-laminas) [![PHP Version Require](http://poser.pugx.org/fabiang/doctrine-migrations-liquibase-laminas/require/php)](https://packagist.org/packages/fabiang/doctrine-migrations-liquibase-laminas)
+[![Latest Stable Version](http://poser.pugx.org/fabiang/doctrine-migrations-liquibase-laminas/v)](https://packagist.org/packages/fabiang/doctrine-migrations-liquibase-laminas)
+[![Total Downloads](http://poser.pugx.org/fabiang/doctrine-migrations-liquibase-laminas/downloads)](https://packagist.org/packages/fabiang/doctrine-migrations-liquibase-laminas)
+[![License](http://poser.pugx.org/fabiang/doctrine-migrations-liquibase-laminas/license)](https://packagist.org/packages/fabiang/doctrine-migrations-liquibase-laminas)
+[![PHP Version Require](http://poser.pugx.org/fabiang/doctrine-migrations-liquibase-laminas/require/php)](https://packagist.org/packages/fabiang/doctrine-migrations-liquibase-laminas)
+[![Continuous Integration](https://github.com/fabiang/doctrine-migrations-liquibase-laminas/actions/workflows/ci.yml/badge.svg)](https://github.com/fabiang/doctrine-migrations-liquibase-laminas/actions/workflows/ci.yml)
 
 ## Installation
 

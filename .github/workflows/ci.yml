@@ -1,11 +1,6 @@
-name: Unit Tests
+name: Continuous Integration
 
-on:
-  push:
-    branches:
-      - "*"
-    pull_request:
-      - "*"
+on: [push, pull_request]
 
 jobs:
   unittest:
@@ -15,22 +10,16 @@ jobs:
       matrix:
         # operating-system: [ubuntu-latest, windows-latest, macOS-latest]
         php:
-          - version: "7.4"
-            composer-args: ""
-          - version: "8.0"
-            composer-args: ""
-          - version: "8.1"
-            composer-args: ""
-          - version: "8.2"
-            composer-args: ""
           - version: "8.3"
+            composer-args: ""
+          - version: "8.4"
             composer-args: ""
         prefer-lowest: ["", "--prefer-lowest"]
 
     name: Unit Tests - PHP ${{ matrix.php.version }} ${{ matrix.prefer-lowest }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
 
       - name: Install PHP
         uses: shivammathur/setup-php@v2
@@ -42,7 +31,7 @@ jobs:
 
       - name: Cache Composer packages
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
@@ -53,4 +42,4 @@ jobs:
         run: composer update --prefer-dist --no-progress ${{ matrix.prefer-lowest }} ${{ matrix.php.composer-args }}
 
       - name: Run test suite
-        run: ./vendor/bin/phpunit
+        run: composer run-script unittests

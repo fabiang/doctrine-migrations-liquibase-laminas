@@ -1,4 +1,7 @@
 /vendor/
 phpunit.xml
 .phpunit.result.cache
+.phpcs-cache
+.phpunit.cache/
 composer.lock
+*.bak

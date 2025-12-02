@@ -4,21 +4,20 @@ declare(strict_types=1);
 
 namespace Fabiang\DoctrineMigrationsLiquibase;
 
-use Interop\Container\ContainerInterface;
+use Fabiang\DoctrineMigrationsLiquibase\ORM\MultiEntityManagerProvider;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputOption;
 
 class CliConfigurator
 {
-
-    private string $defaultObjectManagerName = 'doctrine.entitymanager.orm_default';
-    private array $commands                 = [
+    private array $commands = [
         'doctrine.liquibase.createchangelog',
         'doctrine.liquibase.creatediff',
     ];
-    private ContainerInterface $container;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(private ContainerInterface $container)
     {
         $this->container = $container;
     }
@@ -26,7 +25,7 @@ class CliConfigurator
     public function configure(Application $cli): void
     {
         foreach ($this->commands as $commandName) {
-            /* @var $command \Symfony\Component\Console\Command\Command */
+            /** @var Command $command */
             $command = $this->container->get($commandName);
             $command->getDefinition()->addOption($this->createObjectManagerInputOption());
             $cli->add($command);
@@ -36,12 +35,11 @@ class CliConfigurator
     private function createObjectManagerInputOption(): InputOption
     {
         return new InputOption(
-            'object-manager',
+            'em',
             null,
             InputOption::VALUE_OPTIONAL,
-            'The name of the object manager to use.',
-            $this->defaultObjectManagerName
+            'The name of the entity manager to use.',
+            MultiEntityManagerProvider::DEFAULT_ENTITYMANAGER_NAME
         );
     }
-
 }

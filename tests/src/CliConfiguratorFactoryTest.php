@@ -4,16 +4,14 @@ declare(strict_types=1);
 
 namespace Fabiang\DoctrineMigrationsLiquibase;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 
-/**
- * @coversDefaultClass Fabiang\DoctrineMigrationsLiquibase\CliConfiguratorFactory
- */
+#[CoversClass(CliConfiguratorFactory::class)]
 final class CliConfiguratorFactoryTest extends TestCase
 {
-
     use ProphecyTrait;
 
     private CliConfiguratorFactory $factory;
@@ -23,11 +21,7 @@ final class CliConfiguratorFactoryTest extends TestCase
         $this->factory = new CliConfiguratorFactory();
     }
 
-    /**
-     * @test
-     * @covers ::__invoke
-     */
-    public function invoke(): void
+    public function testinvoke(): void
     {
         $this->assertIsCallable($this->factory);
         $container = $this->prophesize(ContainerInterface::class);
@@ -37,5 +31,4 @@ final class CliConfiguratorFactoryTest extends TestCase
             $this->factory->__invoke($container->reveal(), CliConfigurator::class, [])
         );
     }
-
 }
