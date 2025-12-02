@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Fabiang\DoctrineMigrationsLiquibase;
 
-use Laminas\ServiceManager\Factory\InvokableFactory;
-
 final class ConfigProvider
 {
-
     public function __invoke(): array
     {
         return [
@@ -25,10 +22,10 @@ final class ConfigProvider
             ],
             'factories' => [
                 CliConfigurator::class                => CliConfiguratorFactory::class,
-                Command\CreateChangelogCommand::class => InvokableFactory::class,
-                Command\CreateDiffCommand::class      => InvokableFactory::class,
+                Command\CreateChangelogCommand::class => Command\CommandFactory::class,
+                Command\CreateDiffCommand::class      => Command\CommandFactory::class,
+                ORM\MultiEntityManagerProvider::class => ORM\MultiEntityManagerProviderFactory::class,
             ],
         ];
     }
-
 }

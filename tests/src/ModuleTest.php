@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace Fabiang\DoctrineMigrationsLiquibase;
 
+use Fabiang\DoctrineMigrationsLiquibase\CliConfigurator;
+use Laminas\EventManager\EventInterface;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\SharedEventManagerInterface;
+use Laminas\ModuleManager\ModuleManagerInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
-use Laminas\ModuleManager\ModuleManagerInterface;
-use Laminas\EventManager\EventManagerInterface;
-use Laminas\EventManager\SharedEventManagerInterface;
-use Laminas\EventManager\EventInterface;
-use Interop\Container\ContainerInterface;
-use Fabiang\DoctrineMigrationsLiquibase\CliConfigurator;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 
-/**
- * @coversDefaultClass Fabiang\DoctrineMigrationsLiquibase\Module
- */
+use function call_user_func;
+use function is_callable;
+
+#[CoversClass(Module::class)]
 final class ModuleTest extends TestCase
 {
-
     use ProphecyTrait;
 
     private Module $module;
@@ -30,17 +31,13 @@ final class ModuleTest extends TestCase
         $this->module = new Module();
     }
 
-    /**
-     * @test
-     * @covers ::init
-     */
-    public function init(): void
+    public function testInit(): void
     {
         $sharedEventManager = $this->prophesize(SharedEventManagerInterface::class);
         $sharedEventManager->attach(
-                'doctrine',
-                'loadCli.post',
-                Argument::that(function ($arg) {
+            'doctrine',
+            'loadCli.post',
+            Argument::that(function ($arg) {
                     $app = $this->prophesize(Application::class)->reveal();
 
                     $e = $this->prophesize(EventInterface::class);
@@ -56,9 +53,9 @@ final class ModuleTest extends TestCase
 
                     call_user_func($arg, $e->reveal());
                     return is_callable($arg);
-                }),
-                1
-            )
+            }),
+            1
+        )
             ->shouldBeCalled();
 
         $eventManager = $this->prophesize(EventManagerInterface::class);
@@ -71,23 +68,13 @@ final class ModuleTest extends TestCase
         $this->module->init($moduleManager->reveal());
     }
 
-    /**
-     * @test
-     * @covers ::__construct
-     * @covers ::getServiceConfig
-     */
-    public function getServiceConfig(): void
+    public function testGetServiceConfig(): void
     {
         $this->assertIsArray($this->module->getServiceConfig());
     }
 
-    /**
-     * @test
-     * @covers ::getModuleDependencies
-     */
-    public function getModuleDependencies(): void
+    public function testGetModuleDependencies(): void
     {
         $this->assertSame(['DoctrineModule'], $this->module->getModuleDependencies());
     }
-
 }

@@ -1,2 +1,5 @@
+.github/ export-ignore
+config/ export-ignore
 tests/ export-ignore
-phpunit.xml.dist  export-ignore
+phpunit.xml.dist export-ignore
+phpcs.xml export-ignore
