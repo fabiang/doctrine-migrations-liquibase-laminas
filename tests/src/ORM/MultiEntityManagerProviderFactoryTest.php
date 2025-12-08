@@ -6,12 +6,15 @@ namespace Fabiang\DoctrineMigrationsLiquibase\ORM;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider\UnknownManagerException;
+use Fabiang\DoctrineMigrationsLiquibase\ORM\MultiEntityManagerProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
 #[CoversClass(MultiEntityManagerProviderFactory::class)]
+#[UsesClass(MultiEntityManagerProvider::class)]
 final class MultiEntityManagerProviderFactoryTest extends TestCase
 {
     use ProphecyTrait;

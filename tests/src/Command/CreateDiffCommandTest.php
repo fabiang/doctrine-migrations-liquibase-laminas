@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\QuoteStrategy;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 use Doctrine\ORM\Tools\ToolEvents;
+use Fabiang\DoctrineMigrationsLiquibase\Command\AbstractCommand;
 use Fabiang\DoctrineMigrationsLiquibase\ORM\MultiEntityManagerProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -32,6 +33,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 use function method_exists;
 
 #[CoversClass(CreateDiffCommand::class)]
+#[CoversClass(AbstractCommand::class)]
 final class CreateDiffCommandTest extends TestCase
 {
     use ProphecyTrait;
