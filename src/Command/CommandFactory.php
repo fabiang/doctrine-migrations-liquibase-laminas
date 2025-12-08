@@ -17,6 +17,11 @@ final class CommandFactory implements FactoryInterface
     #[Override]
     public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): AbstractCommand
     {
-        return new $requestedName($container->get(MultiEntityManagerProvider::class));
+        $ignoreTables = [];
+        if ($container->has('config')) {
+            $ignoreTables = $container->get('config')['doctrine']['liquibase']['ignore_tables'] ?? [];
+        }
+
+        return new $requestedName($container->get(MultiEntityManagerProvider::class), (array) $ignoreTables);
     }
 }

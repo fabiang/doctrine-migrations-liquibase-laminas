@@ -6,6 +6,7 @@ namespace Fabiang\DoctrineMigrationsLiquibase\Command;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Tools\Console\Command\AbstractEntityManagerCommand;
+use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 use Fabiang\Doctrine\Migrations\Liquibase\LiquibaseSchemaTool;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -13,6 +14,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 abstract class AbstractCommand extends AbstractEntityManagerCommand
 {
+    public function __construct(EntityManagerProvider $entityManagerProvider, public readonly array $ignoreTables = [])
+    {
+        parent::__construct($entityManagerProvider);
+    }
+
     /**
      * @param ClassMetadata[] $metadatas
      * @return int 0 if everything went fine, or an error code.
@@ -39,6 +45,12 @@ abstract class AbstractCommand extends AbstractEntityManagerCommand
             return 0;
         }
 
-        return $this->executeSchemaCommand($input, $output, new LiquibaseSchemaTool($em), $metadatas, $ui);
+        return $this->executeSchemaCommand(
+            $input,
+            $output,
+            new LiquibaseSchemaTool($em, $this->ignoreTables),
+            $metadatas,
+            $ui
+        );
     }
 }
