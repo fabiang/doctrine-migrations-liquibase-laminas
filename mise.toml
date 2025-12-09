@@ -1,0 +1,11 @@
+[settings]
+experimental = true
+
+[tools]
+php = "8.4"
+
+[env]
+_.file = '.envrc'
+
+[hooks]
+cd = "composer up"

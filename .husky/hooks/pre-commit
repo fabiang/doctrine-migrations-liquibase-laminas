@@ -1,2 +1,26 @@
 #!/bin/sh
-composer test
+mise use php@8.4
+
+composer lint
+
+mise use php@8.3
+composer up
+composer unittest
+composer up --prefer-lowest
+composer unittest
+
+mise use php@8.4
+composer up
+composer unittest
+composer up --prefer-lowest
+composer unittest
+
+mise use php@8.5
+composer up
+composer unittest
+composer up --prefer-lowest
+composer unittest
+
+mise use php@8.4
+
+composer up

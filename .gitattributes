@@ -1,5 +1,9 @@
 .github/ export-ignore
 config/ export-ignore
 tests/ export-ignore
+.envrc export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+mise.toml export-ignore
 phpunit.xml.dist export-ignore
 phpcs.xml export-ignore

@@ -47,10 +47,14 @@
         }
     },
     "scripts": {
+        "lint": [
+            "@phpcs"
+        ],
         "test": [
-            "phpcs",
+            "@lint",
             "@unittests"
         ],
-        "unittests": "php -d zend.assertions=1 -d assert.exception=true ./vendor/bin/phpunit"
+        "phpcs": "phpcs --colors",
+        "unittests": "phpunit --coverage-text --colors"
     }
 }
