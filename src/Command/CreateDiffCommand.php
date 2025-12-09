@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Fabiang\DoctrineMigrationsLiquibase\Command;
 
-use Fabiang\Doctrine\Migrations\Liquibase\LiquibaseSchemaTool;
+use Fabiang\Doctrine\Migrations\Liquibase\SchemaTool;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -20,7 +20,7 @@ class CreateDiffCommand extends AbstractCommand
     protected function executeSchemaCommand(
         InputInterface $input,
         OutputInterface $output,
-        LiquibaseSchemaTool $schemaTool,
+        SchemaTool $schemaTool,
         array $metadatas,
         SymfonyStyle $ui
     ): int {

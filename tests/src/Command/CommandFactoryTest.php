@@ -44,6 +44,6 @@ final class CommandFactoryTest extends TestCase
 
         $instance = $this->factory->__invoke($container->reveal(), CreateChangelogCommand::class, []);
         $this->assertInstanceOf(CreateChangelogCommand::class, $instance);
-        $this->assertSame(['test_table'], $instance->ignoreTables);
+        $this->assertSame(['test_table'], $instance->options->getIgnoreTables());
     }
 }

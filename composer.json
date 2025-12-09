@@ -11,11 +11,11 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "~8.3.0 || ~8.4.0",
+        "php": "~8.3.0 || ~8.4.0 || ~8.5.0",
         "doctrine/dbal": "^3.10 || ^4.0",
         "doctrine/doctrine-module": "^6.3",
         "doctrine/orm": "^2.0 || ^3.0",
-        "fabiang/doctrine-migrations-liquibase": "^3.0",
+        "fabiang/doctrine-migrations-liquibase": "^4.0",
         "laminas/laminas-modulemanager": "^2.8",
         "laminas/laminas-servicemanager": "^3.0",
         "symfony/console": "^7.0"

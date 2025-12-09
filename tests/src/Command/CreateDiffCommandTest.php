@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\QuoteStrategy;
 use Doctrine\ORM\Tools\Console\EntityManagerProvider;
 use Doctrine\ORM\Tools\ToolEvents;
+use Fabiang\Doctrine\Migrations\Liquibase\Options;
 use Fabiang\DoctrineMigrationsLiquibase\Command\AbstractCommand;
 use Fabiang\DoctrineMigrationsLiquibase\ORM\MultiEntityManagerProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -47,8 +48,10 @@ final class CreateDiffCommandTest extends TestCase
     {
         $this->entityManagerProvider = $this->prophesize(EntityManagerProvider::class);
 
+        $options = new Options();
+
         $application = new Application();
-        $application->add(new CreateDiffCommand($this->entityManagerProvider->reveal()));
+        $application->add(new CreateDiffCommand($this->entityManagerProvider->reveal(), $options));
 
         $command = $application->find('orm:liquibase:creatediff');
 
